@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ASCON_SHOP</string>
+    <string name="app_name">Интернет магазин АСКОН</string>
+    <string name="url_server">http://85.116.125.41:8080</string>
 </resources>
