@@ -1,7 +1,8 @@
-package com.suvorov.ascon_shop
+package com.suvorov.ascon_shop.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.suvorov.ascon_shop.R
 
 class MainActivity : AppCompatActivity() {
 
