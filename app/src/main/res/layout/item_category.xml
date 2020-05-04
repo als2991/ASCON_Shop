@@ -5,17 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/categoryImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
     <TextView
         android:id="@+id/categoryTv"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:textSize="22dp"
         android:paddingBottom="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:text ="Категория"/>
+        android:textColor="@color/colorBlack"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/categoryImg"
+        app:layout_constraintStart_toEndOf="@+id/categoryImg"
+        app:layout_constraintTop_toTopOf="@+id/categoryImg"
+        tools:text="Категория" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

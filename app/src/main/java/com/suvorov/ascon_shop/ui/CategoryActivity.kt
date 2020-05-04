@@ -1,42 +1,43 @@
 package com.suvorov.ascon_shop.ui
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suvorov.ascon_shop.R
 import com.suvorov.ascon_shop.domain.MainApi
-import com.suvorov.ascon_shop.presenter.CatalogPresenter
-import kotlinx.android.synthetic.main.activity_catalog.*
+import com.suvorov.ascon_shop.domain.RemoteCategory
+import com.suvorov.ascon_shop.presenter.CategoryPresenter
+import kotlinx.android.synthetic.main.activity_category.*
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
-class CatalogActivity: MvpAppCompatActivity(), CatalogView {
+class CategoryActivity: MvpAppCompatActivity(), CategoryView {
     private val presenter by moxyPresenter {
         val retrofit = Retrofit.Builder()
             .baseUrl(getString(R.string.url_server))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(MainApi::class.java)
-        CatalogPresenter(
+        CategoryPresenter(
             mainApi = service
         )
     }
 
-    private val adapter = CategoryAdapter()
+    private val adapter = CategoryAdapter(
+        this
+    )
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        setContentView(R.layout.activity_catalog)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_category)
 
         categoryRv.layoutManager = LinearLayoutManager(this)
         categoryRv.adapter = adapter
 
     }
 
-    override fun setCategory(list: List<String>) {
+    override fun setCategory(list: List<RemoteCategory>) {
         adapter.setData(list)
     }
 }

@@ -2,6 +2,7 @@ package com.suvorov.ascon_shop.domain
 
 import retrofit2.http.GET
 import retrofit2.http.Path
+import java.net.URL
 
 data class RemoteProduct(
     val id: String,
@@ -22,6 +23,7 @@ data class RemoteProduct(
 data class RemoteCategory(
     val id: String,
     val name: String,
+    val description: String,
     val imageUrl: String
 )
 
