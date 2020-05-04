@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.item_category.*
 import java.net.URL
 
 class CategoryAdapter(
-    private val context: Context
+    private val context: Context,
+    private val onCategoryClick: (category: RemoteCategory) -> Unit
 ):RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
     //создает объект ViewHolder для каждой строки списка в Layout
@@ -45,6 +46,7 @@ class CategoryAdapter(
                 .load(category.imageUrl)
                 .error(R.drawable.ic_no_category)
                 .into(categoryImg)
+            containerView.setOnClickListener { onCategoryClick(category) }
         }
     }
 }

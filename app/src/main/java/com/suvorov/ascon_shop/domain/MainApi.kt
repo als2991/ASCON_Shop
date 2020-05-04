@@ -1,9 +1,12 @@
 package com.suvorov.ascon_shop.domain
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import retrofit2.http.GET
 import retrofit2.http.Path
 import java.net.URL
 
+@Parcelize
 data class RemoteProduct(
     val id: String,
     val tag: String,
@@ -13,19 +16,24 @@ data class RemoteProduct(
     val description: String,
     val imageUrl: String,
     val attributes: List<Attribute>
-) {
+): Parcelable {
+
+    @Parcelize
     data class Attribute(
         val name: String,
         val value: String
-    )
+    ): Parcelable
+
 }
 
+@Parcelize
 data class RemoteCategory(
     val id: String,
+    val tag: String,
     val name: String,
     val description: String,
     val imageUrl: String
-)
+): Parcelable
 
 interface MainApi {
 

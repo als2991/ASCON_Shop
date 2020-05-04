@@ -9,4 +9,8 @@ interface CategoryView: MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun setCategory(list: List<RemoteCategory>)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun onShowCategoryProducts(category: RemoteCategory)
+
 }
