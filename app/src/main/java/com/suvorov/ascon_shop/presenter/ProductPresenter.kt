@@ -13,7 +13,7 @@ class ProductPresenter(
     private val mainApi: MainApi
 ): BasePresenter<ProductView>() {
 
-    var tagCategory: String = ""
+    private var tagCategory: String = ""
 
     override fun attachView(view: ProductView?) {
         super.attachView(view)
@@ -34,8 +34,14 @@ class ProductPresenter(
 
 
     fun getCategory(category: RemoteCategory){
-        val tagCategory = category.tag
-        this.tagCategory = tagCategory
+        this.tagCategory = category.tag
+    }
+
+    fun getDiscountPrice(product: RemoteProduct): Double =
+        product.price * (100 - product.discountPercent) /100
+
+    fun onProductClick(product: RemoteProduct) {
+
     }
 }
 

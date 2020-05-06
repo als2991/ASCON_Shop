@@ -2,11 +2,13 @@ package com.suvorov.ascon_shop.ui
 
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.suvorov.ascon_shop.R
 import com.suvorov.ascon_shop.domain.MainApi
 import com.suvorov.ascon_shop.domain.RemoteCategory
 import com.suvorov.ascon_shop.domain.RemoteProduct
 import com.suvorov.ascon_shop.presenter.ProductPresenter
+import kotlinx.android.synthetic.main.activity_product.*
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import retrofit2.Retrofit
@@ -24,6 +26,12 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
             mainApi = service
     ) }
 
+    private val adapter = ProductAdapter(
+        this,
+     { product -> presenter.onProductClick(product)},
+        {product -> presenter.getDiscountPrice(product)}
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("myDebug","onCreateBeforeSetContentView")
@@ -33,10 +41,20 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
         val category = intent?.getParcelableExtra<RemoteCategory>(CATEGORY_TAG) ?: return
         presenter.getCategory(category)
         Log.d("myDebug","onCreateAftergetCategory")
+
+        productRv.layoutManager = LinearLayoutManager(this)
+        productRv.adapter = adapter
+
+        prCategoryName.text =  category.name
+
+
+        back.setOnClickListener { finish() }
     }
 
-    override fun setProduct(product: List<RemoteProduct>) {
-        TODO("Not yet implemented")
+    override fun setProduct(
+        product: List<RemoteProduct>
+    ) {
+        adapter.setData(product)
     }
 
     companion object {
