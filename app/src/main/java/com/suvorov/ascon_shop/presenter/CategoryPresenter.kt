@@ -26,7 +26,6 @@ class CategoryPresenter (
 
     fun onCategoryClick(category: RemoteCategory){
         viewState.onShowCategoryProducts(category)
-
     }
 
 

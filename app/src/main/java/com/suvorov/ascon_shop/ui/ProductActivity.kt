@@ -10,7 +10,9 @@ import com.suvorov.ascon_shop.domain.RemoteCategory
 import com.suvorov.ascon_shop.domain.RemoteProduct
 import com.suvorov.ascon_shop.presenter.ProductPresenter
 import com.suvorov.ascon_shop.ui.AboutProductActivity.Companion.PRODUCT_TAG
+import kotlinx.android.synthetic.main.activity_basket.*
 import kotlinx.android.synthetic.main.activity_product.*
+import kotlinx.android.synthetic.main.activity_product.back
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import retrofit2.Retrofit
@@ -31,7 +33,8 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
     private val adapter = ProductAdapter(
         this,
      { product -> presenter.onProductClick(product)},
-        {product -> presenter.getDiscountPrice(product)}
+        {product -> presenter.getDiscountPrice(product)},
+        {product -> presenter.addAllBasketProduct(product)}
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +53,10 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
         prCategoryName.text =  category.name
 
         back.setOnClickListener { finish() }
+
+        basket.setOnClickListener {
+            startActivity(Intent(this, BasketActivity::class.java))
+        }
     }
 
     override fun setProduct(

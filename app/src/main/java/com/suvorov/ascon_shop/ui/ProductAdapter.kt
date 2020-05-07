@@ -11,12 +11,15 @@ import com.bumptech.glide.Glide
 import com.suvorov.ascon_shop.R
 import com.suvorov.ascon_shop.domain.RemoteProduct
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.activity_basket.view.*
 import kotlinx.android.synthetic.main.item_product.*
+import kotlinx.android.synthetic.main.item_product.view.*
 
 class ProductAdapter(
     private val context: Context,
     private val onProductClick: (product: RemoteProduct) -> Unit,
-    private val getDiscountPrice: (product: RemoteProduct) -> Double
+    private val getDiscountPrice: (product: RemoteProduct) -> Double,
+    private val onAddBasketClick: (product: RemoteProduct) -> Unit
 ): RecyclerView.Adapter<ProductAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductAdapter.ViewHolder =
@@ -57,6 +60,8 @@ class ProductAdapter(
                 .error(R.drawable.ic_no_category)
                 .into(productImg)
             containerView.setOnClickListener { onProductClick(product) }
+            itemView.productAdd.setOnClickListener { onAddBasketClick(product) }
+
         }
     }
 }

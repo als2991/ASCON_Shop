@@ -27,4 +27,9 @@ abstract class BasePresenter<TView: MvpView>: MvpPresenter<TView>(), CoroutineSc
 
     fun getDiscountPrice(product: RemoteProduct): Double =
         product.price * (100 - product.discountPercent) /100
+
+    var allBasketProduct: MutableList<RemoteProduct> = mutableListOf()
+
+    fun addAllBasketProduct(product: RemoteProduct) = allBasketProduct.add(product)
+
 }

@@ -26,7 +26,7 @@ class CategoryAdapter(
     private var categories: List<RemoteCategory> = listOf()
 
     fun setData(categories: List<RemoteCategory>){
-          this.categories = categories
+        this.categories = categories
         notifyDataSetChanged()
     }
 
