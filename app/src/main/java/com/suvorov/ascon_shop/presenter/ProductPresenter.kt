@@ -27,8 +27,8 @@ class ProductPresenter(
         launch {
             Log.d("myDebug","onFirstViewAttachLaunch")
             val remoteProduct = mainApi.allProduct("suvorov")
-            remoteProduct.filter { it.tag == "engin" }
-            viewState.setProduct(remoteProduct)
+            val filterRemoteProduct = remoteProduct.filter { it.tag == tagCategory }
+            viewState.setProduct(filterRemoteProduct)
         }
     }
 
@@ -37,10 +37,10 @@ class ProductPresenter(
         this.tagCategory = category.tag
     }
 
-    fun getDiscountPrice(product: RemoteProduct): Double =
-        product.price * (100 - product.discountPercent) /100
+
 
     fun onProductClick(product: RemoteProduct) {
+        viewState.onShowProduct(product)
 
     }
 }

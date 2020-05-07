@@ -1,13 +1,16 @@
 package com.suvorov.ascon_shop.presenter
 
+import com.suvorov.ascon_shop.domain.RemoteProduct
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import moxy.InjectViewState
 import moxy.MvpPresenter
 import moxy.MvpView
 import kotlin.coroutines.CoroutineContext
 
+@InjectViewState
 abstract class BasePresenter<TView: MvpView>: MvpPresenter<TView>(), CoroutineScope{
 
     private val job = SupervisorJob()
@@ -21,4 +24,7 @@ abstract class BasePresenter<TView: MvpView>: MvpPresenter<TView>(), CoroutineSc
         super.onDestroy()
         job.cancel()
     }
+
+    fun getDiscountPrice(product: RemoteProduct): Double =
+        product.price * (100 - product.discountPercent) /100
 }

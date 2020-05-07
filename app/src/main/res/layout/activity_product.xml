@@ -26,7 +26,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/basket"
         android:textColor="@color/colorBlack"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:layout_marginTop="5dp"
         tools:text ="Название категории"/>
 

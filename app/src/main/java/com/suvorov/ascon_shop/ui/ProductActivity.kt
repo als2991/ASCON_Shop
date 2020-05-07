@@ -1,5 +1,6 @@
 package com.suvorov.ascon_shop.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import com.suvorov.ascon_shop.domain.MainApi
 import com.suvorov.ascon_shop.domain.RemoteCategory
 import com.suvorov.ascon_shop.domain.RemoteProduct
 import com.suvorov.ascon_shop.presenter.ProductPresenter
+import com.suvorov.ascon_shop.ui.AboutProductActivity.Companion.PRODUCT_TAG
 import kotlinx.android.synthetic.main.activity_product.*
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -47,7 +49,6 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
 
         prCategoryName.text =  category.name
 
-
         back.setOnClickListener { finish() }
     }
 
@@ -55,6 +56,12 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
         product: List<RemoteProduct>
     ) {
         adapter.setData(product)
+    }
+
+    override fun onShowProduct(product: RemoteProduct) {
+        startActivity(Intent(this, AboutProductActivity::class.java).apply {
+            putExtra(PRODUCT_TAG, product)
+        })
     }
 
     companion object {
