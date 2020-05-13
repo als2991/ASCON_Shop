@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -9,7 +10,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_back" />
+        app:srcCompat="@drawable/ic_back"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/basketHeader"
@@ -17,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:padding="10dp"
-        android:text="Корзина"
+        android:text="@string/basket"
         android:textColor="@color/colorBlack"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -31,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#6689EE"
-        android:text="Оформить заказ"
+        android:text="@string/createOrder"
         android:textColor="@color/colorBlack"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

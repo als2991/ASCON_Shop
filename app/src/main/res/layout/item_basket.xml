@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Скидка"
+        android:text="@string/sale"
         android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toStartOf="@+id/itemDiscount"
         app:layout_constraintTop_toBottomOf="@+id/itemNameProduct" />
@@ -38,7 +38,8 @@
         android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ItemDiscountText"
-        tool:text="15%" />
+        tool:text="15%"
+        tool:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/itemNameProduct"
@@ -56,7 +57,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_delete"
-        android:paddingRight="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/itemNameProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/itemNameProduct"

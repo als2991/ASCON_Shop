@@ -8,7 +8,7 @@ class BasketPresenter: BasePresenter<BasketView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.setData(allBasketProduct)
+        //viewState.setData(allBasketProduct)
     }
 
 }

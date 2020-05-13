@@ -27,18 +27,18 @@
         tools:ignore="ContentDescription" />
 
 
-        <TextView
-            android:id="@+id/categoryHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="АСКОН — РОССИЙСКИЙ РАЗРАБОТЧИК И ИНТЕГРАТОР ИНЖЕНЕРНОГО ПРОГРАММНОГО ОБЕСПЕЧЕНИЯ"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/logo"
-            tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/categoryHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/captionAscon"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/categorySubHeader"
@@ -46,13 +46,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="Выберите вашу отрасль:"
+        android:text="@string/selectOurIndustry"
         android:textColor="@color/colorBlack"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/categoryHeader"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginStart="15dp"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -64,6 +64,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/categorySubHeader"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

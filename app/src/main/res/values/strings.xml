@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Интернет магазин АСКОН</string>
     <string name="url_server">http://85.116.125.41:8080</string>
-<!--        <string name="url_server">http://127.0.0.1:8080</string>-->
+    <string name="ourProducts">Наши продукты:</string>
+    <string name="price">Cтоимость:</string>
+    <string name="basket">Корзина</string>
+    <string name="createOrder">Оформить заказ</string>
+    <string name="captionAscon">АСКОН — РОССИЙСКИЙ РАЗРАБОТЧИК И ИНТЕГРАТОР ИНЖЕНЕРНОГО ПРОГРАММНОГО ОБЕСПЕЧЕНИЯ</string>
+    <string name="selectOurIndustry">Выберите вашу отрасль:</string>
+    <string name="sale">Скидка</string>
+    <!--<string name="url_server">http://127.0.0.1:8080</string>-->
 </resources>

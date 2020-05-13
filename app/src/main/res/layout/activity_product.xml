@@ -52,16 +52,17 @@
         android:textStyle="bold"
         android:textSize="20sp"
         android:layout_marginTop="40dp"
-        android:text="Наши продукты:"/>
+        android:paddingBottom="10dp"
+        android:text="@string/ourProducts"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productRv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productHeader"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productHeader" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

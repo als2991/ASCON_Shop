@@ -27,9 +27,9 @@ class CategoryActivity: MvpAppCompatActivity(), CategoryView {
         )
     }
 
-    private val adapter = CategoryAdapter(
-        this
-    ) { category -> presenter.onCategoryClick(category)}
+    private val adapter = CategoryAdapter(this){
+            category -> presenter.onCategoryClick(category)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -54,7 +54,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/aboutProductImage"
-            android:text="Cтоимость:"/>
+            android:text="@string/price"/>
 
 
         <TextView
@@ -94,17 +94,17 @@
             tools:text= "Описание:"/>
 
         <TextView
-        android:id="@+id/aboutProductDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
+            android:id="@+id/aboutProductDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
             android:layout_gravity="center_vertical|end"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/descriptionText"
             app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Описание товара"/>
+            tools:text="Описание товара"/>
 
         <TextView
             android:id="@+id/opportunitiesText"
@@ -131,6 +131,5 @@
             tools:text="Описание возможнойстей"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </ScrollView>

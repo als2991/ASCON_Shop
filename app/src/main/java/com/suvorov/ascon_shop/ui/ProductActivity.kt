@@ -34,23 +34,21 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
         this,
      { product -> presenter.onProductClick(product)},
         {product -> presenter.getDiscountPrice(product)},
-        {product -> presenter.addAllBasketProduct(product)}
+        {product -> presenter.addProductInBasket(product)}
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("myDebug","onCreateBeforeSetContentView")
         setContentView(R.layout.activity_product)
-        Log.d("myDebug","onCreateAfterSetContentView")
 
         val category = intent?.getParcelableExtra<RemoteCategory>(CATEGORY_TAG) ?: return
         presenter.getCategory(category)
-        Log.d("myDebug","onCreateAftergetCategory")
 
         productRv.layoutManager = LinearLayoutManager(this)
         productRv.adapter = adapter
 
-        prCategoryName.text =  category.name
+        //Caption activity
+        prCategoryName.text = category.name
 
         back.setOnClickListener { finish() }
 
@@ -59,9 +57,7 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
         }
     }
 
-    override fun setProduct(
-        product: List<RemoteProduct>
-    ) {
+    override fun setProduct(product: List<RemoteProduct>) {
         adapter.setData(product)
     }
 

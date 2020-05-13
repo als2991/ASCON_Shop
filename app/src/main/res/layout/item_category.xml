@@ -22,7 +22,7 @@
         android:textColor="@color/colorBlack"
         android:textStyle="bold"
         android:textSize="22sp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
         android:padding="50dp"
         app:layout_constraintBottom_toBottomOf="@+id/categoryImg"
         app:layout_constraintStart_toEndOf="@+id/categoryImg"
