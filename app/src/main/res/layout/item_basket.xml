@@ -14,6 +14,7 @@
         android:paddingBottom="8dp"
         android:textColor="@color/colorBlack"
         android:textStyle="bold"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/itemNameProduct"
         app:layout_constraintEnd_toStartOf="@+id/deleteIv"
         app:layout_constraintTop_toTopOf="@+id/itemNameProduct"
@@ -26,7 +27,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/sale"
-        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        android:textColor="@color/colorRed"
         app:layout_constraintEnd_toStartOf="@+id/itemDiscount"
         app:layout_constraintTop_toBottomOf="@+id/itemNameProduct" />
 
@@ -35,9 +37,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingEnd="8dp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorRed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ItemDiscountText"
+        android:textSize="16sp"
         tool:text="15%"
         tool:ignore="RtlSymmetry" />
 
@@ -46,6 +49,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

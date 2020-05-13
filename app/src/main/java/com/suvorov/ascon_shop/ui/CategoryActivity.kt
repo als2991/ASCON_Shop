@@ -9,6 +9,8 @@ import com.suvorov.ascon_shop.domain.RemoteCategory
 import com.suvorov.ascon_shop.presenter.CategoryPresenter
 import com.suvorov.ascon_shop.ui.ProductActivity.Companion.CATEGORY_TAG
 import kotlinx.android.synthetic.main.activity_category.*
+import kotlinx.android.synthetic.main.activity_category.basket
+import kotlinx.android.synthetic.main.activity_product.*
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import retrofit2.Retrofit
@@ -37,6 +39,10 @@ class CategoryActivity: MvpAppCompatActivity(), CategoryView {
 
         categoryRv.layoutManager = LinearLayoutManager(this)
         categoryRv.adapter = adapter
+
+        basket.setOnClickListener {
+            startActivity(Intent(this, BasketActivity::class.java))
+        }
     }
 
     override fun setCategory(list: List<RemoteCategory>) {

@@ -1,5 +1,6 @@
 package com.suvorov.ascon_shop.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,10 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_basket.*
 import kotlinx.android.synthetic.main.item_category.*
 
-class BasketAdapter: RecyclerView.Adapter<BasketAdapter.ViewHolder>() {
+class BasketAdapter(
+    private val getDiscountPrice: (product: RemoteProduct) -> Double,
+    private val onDeleteProduct: (product: RemoteProduct, position: Int) -> Unit
+): RecyclerView.Adapter<BasketAdapter.ViewHolder>() {
 
 
     private var basketProduct: List<RemoteProduct> = listOf()
@@ -37,16 +41,13 @@ class BasketAdapter: RecyclerView.Adapter<BasketAdapter.ViewHolder>() {
 
     inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView),
         LayoutContainer {
+        @SuppressLint("SetTextI18n")
         fun bind(product: RemoteProduct){
            itemNameProduct.text = product.name
-            itemPrice.text = "${product.price}"
-            itemDiscount.text = "${product.discountPercent}"
-//            Glide
-//                .with(context)
-//                .load(category.imageUrl)
-//                .error(R.drawable.ic_no_category)
-//                .into(categoryImg)
-//            containerView.setOnClickListener { onCategoryClick(category) }
+            itemPrice.text = "${getDiscountPrice(product)} р"
+            itemDiscount.text = "${product.discountPercent} %"
+            deleteIv.setOnClickListener { onDeleteProduct(product,adapterPosition) }
+
         }
     }
 }

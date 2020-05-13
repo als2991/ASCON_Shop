@@ -1,14 +1,16 @@
 package com.suvorov.ascon_shop.domain
 
-interface ViewProductDao {
+interface ViewedProductDao {
         /**
          * save this product id as viewed
          */
-        fun addProductInBasket(product: RemoteProduct)
+        fun addProductInBasket(id: String)
 
         /**
          * get all viewed product ids
          * might be empty
          */
-        fun getAllProducts(): List<RemoteProduct>
+        fun getAllProducts(): List<String>
+
+        fun deleteProductInBasket(id: String)
 }

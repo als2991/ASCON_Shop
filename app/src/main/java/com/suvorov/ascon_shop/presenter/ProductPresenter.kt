@@ -6,13 +6,15 @@ import com.suvorov.ascon_shop.data.Basket
 import com.suvorov.ascon_shop.domain.MainApi
 import com.suvorov.ascon_shop.domain.RemoteCategory
 import com.suvorov.ascon_shop.domain.RemoteProduct
+import com.suvorov.ascon_shop.domain.ViewedProductDao
 import com.suvorov.ascon_shop.ui.ProductView
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 
 @InjectViewState
 class ProductPresenter(
-    private val mainApi: MainApi
+    private val mainApi: MainApi,
+    private val viewedProductDao: ViewedProductDao
 ): BasePresenter<ProductView>() {
 
     private var tagCategory: String = ""
@@ -37,6 +39,8 @@ class ProductPresenter(
     }
 
     fun addProductInBasket(product: RemoteProduct){
+        viewedProductDao.addProductInBasket(product.id)
+        viewState.onAddProductMessage(product.name)
     }
 }
 

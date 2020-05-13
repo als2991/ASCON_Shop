@@ -12,4 +12,7 @@ interface ProductView: MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun onShowProduct(product: RemoteProduct)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun onAddProductMessage(name: String)
 }

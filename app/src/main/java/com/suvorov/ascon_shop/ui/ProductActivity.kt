@@ -1,10 +1,15 @@
 package com.suvorov.ascon_shop.ui
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suvorov.ascon_shop.R
+import com.suvorov.ascon_shop.data.ViewedProductDaoIml
 import com.suvorov.ascon_shop.domain.MainApi
 import com.suvorov.ascon_shop.domain.RemoteCategory
 import com.suvorov.ascon_shop.domain.RemoteProduct
@@ -27,7 +32,8 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
             .build()
         val service = retrofit.create(MainApi::class.java)
         ProductPresenter(
-            mainApi = service
+            mainApi = service,
+            viewedProductDao = ViewedProductDaoIml(sharedPreferences)
     ) }
 
     private val adapter = ProductAdapter(
@@ -67,7 +73,14 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
         })
     }
 
+    override fun onAddProductMessage(name: String) {
+        Toast.makeText(this,"Товар $name добавлен в корзину", Toast.LENGTH_SHORT).show()
+    }
+
     companion object {
         const val CATEGORY_TAG = "CATEGORY_TAG"
     }
 }
+
+val AppCompatActivity.sharedPreferences: SharedPreferences
+    get() = getSharedPreferences("data", Context.MODE_PRIVATE)

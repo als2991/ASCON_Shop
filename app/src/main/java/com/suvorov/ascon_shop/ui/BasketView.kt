@@ -9,4 +9,7 @@ interface BasketView: MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun setData(list: List<RemoteProduct>){}
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun removeItem(position: Int)
 }
