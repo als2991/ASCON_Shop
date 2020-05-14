@@ -13,4 +13,6 @@ interface ViewedProductDao {
         fun getAllProducts(): List<String>
 
         fun deleteProductInBasket(id: String)
+
+        fun clearProductInBasket()
 }

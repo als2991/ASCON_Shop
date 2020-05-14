@@ -11,6 +11,7 @@ import com.suvorov.ascon_shop.domain.RemoteCategory
 import com.suvorov.ascon_shop.domain.RemoteProduct
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_basket.*
+import kotlinx.android.synthetic.main.item_basket.view.*
 import kotlinx.android.synthetic.main.item_category.*
 
 class BasketAdapter(
@@ -32,6 +33,17 @@ class BasketAdapter(
 
     }
 
+    fun deleteProduct(product: RemoteProduct){
+        val filterBasketProduct = mutableListOf<RemoteProduct>().apply {
+            addAll(basketProduct.filter { it != product })
+        }
+        basketProduct = filterBasketProduct
+    }
+
+    fun getBasketProduct(): List<RemoteProduct>{
+        return basketProduct
+    }
+
 
     override fun getItemCount(): Int = basketProduct.size
 
@@ -46,7 +58,7 @@ class BasketAdapter(
            itemNameProduct.text = product.name
             itemPrice.text = "${getDiscountPrice(product)} р"
             itemDiscount.text = "${product.discountPercent} %"
-            deleteIv.setOnClickListener { onDeleteProduct(product,adapterPosition) }
+            itemView.deleteIv.setOnClickListener { onDeleteProduct(product,adapterPosition) }
 
         }
     }

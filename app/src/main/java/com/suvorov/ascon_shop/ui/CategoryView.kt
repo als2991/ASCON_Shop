@@ -13,4 +13,7 @@ interface CategoryView: MvpView {
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun onShowCategoryProducts(category: RemoteCategory)
 
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showError(text: String?)
+
 }

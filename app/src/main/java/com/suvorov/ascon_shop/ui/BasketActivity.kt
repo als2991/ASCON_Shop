@@ -1,13 +1,16 @@
 package com.suvorov.ascon_shop.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suvorov.ascon_shop.R
 import com.suvorov.ascon_shop.data.ViewedProductDaoIml
 import com.suvorov.ascon_shop.domain.MainApi
 import com.suvorov.ascon_shop.domain.RemoteProduct
 import com.suvorov.ascon_shop.presenter.BasketPresenter
+import com.suvorov.ascon_shop.ui.CreateOrderActivity.Companion.TOTALPRICE_TAG
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.activity_basket.*
 import moxy.MvpAppCompatActivity
@@ -25,7 +28,8 @@ class BasketActivity: MvpAppCompatActivity(), BasketView {
         val service = retrofit.create(MainApi::class.java)
         BasketPresenter(
             mainApi = service,
-            viewedProductDao = ViewedProductDaoIml(sharedPreferences)
+            viewedProductDao = ViewedProductDaoIml(sharedPreferences),
+            context = this
         ) }
 
     private val adapter = BasketAdapter(
@@ -41,13 +45,25 @@ class BasketActivity: MvpAppCompatActivity(), BasketView {
         basketRv.adapter = adapter
 
         back.setOnClickListener { finish() }
+
+
+        basketCreateOrder.setOnClickListener {
+            startActivity(Intent(this, CreateOrderActivity::class.java).apply {
+                putExtra(TOTALPRICE_TAG, presenter.getTotalPrice(adapter.getBasketProduct()))
+            })
+        }
     }
 
     override fun setData(list: List<RemoteProduct>) {
         adapter.setBasket(list)
     }
 
-    override fun removeItem(position: Int) {
+    override fun removeItem(product: RemoteProduct, position: Int) {
+        adapter.deleteProduct(product)
         adapter.notifyItemRemoved(position)
+    }
+
+    override fun showError(text: String?) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 }

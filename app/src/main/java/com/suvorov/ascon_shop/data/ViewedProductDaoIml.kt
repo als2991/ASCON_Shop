@@ -45,6 +45,10 @@ class ViewedProductDaoIml(
         return savedProductsId
     }
 
+    override fun clearProductInBasket() {
+        sharedPreferences.edit().remove(PRODUCT).apply()
+    }
+
     companion object  {
         private const val PRODUCT = "PRODUCT"
     }

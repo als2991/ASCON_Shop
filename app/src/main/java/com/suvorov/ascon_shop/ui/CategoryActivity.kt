@@ -1,7 +1,9 @@
 package com.suvorov.ascon_shop.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suvorov.ascon_shop.R
 import com.suvorov.ascon_shop.domain.MainApi
@@ -25,7 +27,8 @@ class CategoryActivity: MvpAppCompatActivity(), CategoryView {
             .build()
         val service = retrofit.create(MainApi::class.java)
         CategoryPresenter(
-            mainApi = service
+            mainApi = service,
+            context = this
         )
     }
 
@@ -53,5 +56,9 @@ class CategoryActivity: MvpAppCompatActivity(), CategoryView {
         startActivity(Intent(this, ProductActivity::class.java).apply {
             putExtra(CATEGORY_TAG, category)
         })
+    }
+
+    override fun showError(text: String?) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 }

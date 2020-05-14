@@ -33,7 +33,8 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
         val service = retrofit.create(MainApi::class.java)
         ProductPresenter(
             mainApi = service,
-            viewedProductDao = ViewedProductDaoIml(sharedPreferences)
+            viewedProductDao = ViewedProductDaoIml(sharedPreferences),
+            context = this
     ) }
 
     private val adapter = ProductAdapter(
@@ -75,6 +76,10 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
 
     override fun onAddProductMessage(name: String) {
         Toast.makeText(this,"Товар $name добавлен в корзину", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showError(text: String?) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 
     companion object {

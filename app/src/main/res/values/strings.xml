@@ -8,5 +8,14 @@
     <string name="captionAscon">АСКОН — РОССИЙСКИЙ РАЗРАБОТЧИК И ИНТЕГРАТОР ИНЖЕНЕРНОГО ПРОГРАММНОГО ОБЕСПЕЧЕНИЯ</string>
     <string name="selectOurIndustry">Выберите вашу отрасль:</string>
     <string name="sale">Скидка</string>
-    <!--<string name="url_server">http://127.0.0.1:8080</string>-->
+    <string name="createOrderHeader">Оформление заказа</string>
+    <string name="placeOrder">Оформить заказ</string>
+    <string name="organization">Организация</string>
+    <string name="fio">ФИО</string>
+    <string name="position">Должность</string>
+    <string name="phone">Телефон</string>
+    <string name="examplePhone">Пример +79999999999</string>
+    <string name="totalPayment">Сумма счета к оплате:</string>
+    <string name="email">Email</string>
+    <string name="no_connect_internet">Нет подключения к интернету</string>
 </resources>

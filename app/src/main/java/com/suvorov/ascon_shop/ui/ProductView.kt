@@ -15,4 +15,7 @@ interface ProductView: MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun onAddProductMessage(name: String)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showError(text: String?)
 }
