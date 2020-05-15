@@ -19,18 +19,22 @@ class BasketAdapter(
     private val onDeleteProduct: (product: RemoteProduct, position: Int) -> Unit
 ): RecyclerView.Adapter<BasketAdapter.ViewHolder>() {
 
-
     private var basketProduct: List<RemoteProduct> = listOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketAdapter.ViewHolder =
-        ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_basket, parent, false)
-        )
+    inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView),
+        LayoutContainer {
+        @SuppressLint("SetTextI18n")
+        fun bind(product: RemoteProduct){
+            itemNameProduct.text = product.name
+            itemPrice.text = "${getDiscountPrice(product)} р"
+            itemDiscount.text = "${product.discountPercent} %"
+            itemView.deleteIv.setOnClickListener { onDeleteProduct(product,adapterPosition) }
+        }
+    }
 
-    fun setBasket(list: List<RemoteProduct>){
+    fun setData(list: List<RemoteProduct>){
         this.basketProduct = list
         notifyDataSetChanged()
-
     }
 
     fun deleteProduct(product: RemoteProduct){
@@ -44,22 +48,13 @@ class BasketAdapter(
         return basketProduct
     }
 
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketAdapter.ViewHolder =
+        ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_basket, parent, false)
+        )
     override fun getItemCount(): Int = basketProduct.size
 
     override fun onBindViewHolder(holder: BasketAdapter.ViewHolder, position: Int) {
         holder.bind(basketProduct[position])
-    }
-
-    inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView),
-        LayoutContainer {
-        @SuppressLint("SetTextI18n")
-        fun bind(product: RemoteProduct){
-           itemNameProduct.text = product.name
-            itemPrice.text = "${getDiscountPrice(product)} р"
-            itemDiscount.text = "${product.discountPercent} %"
-            itemView.deleteIv.setOnClickListener { onDeleteProduct(product,adapterPosition) }
-
-        }
     }
 }

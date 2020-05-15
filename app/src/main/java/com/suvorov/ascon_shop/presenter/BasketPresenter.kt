@@ -11,8 +11,6 @@ import moxy.InjectViewState
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
-import java.text.FieldPosition
-import java.util.concurrent.TimeoutException
 
 @InjectViewState
 class BasketPresenter(
@@ -25,14 +23,15 @@ class BasketPresenter(
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+
         productsIdInBasket.addAll(viewedProductDao.getAllProducts())
 
-        if(!hasConnection(context = context)) viewState.showError(context.getString(R.string.no_connect_internet))
-
-        launch {
-            val remoteProduct = mainApi.allProduct("suvorov")
+        if(!hasConnection(context = context)) viewState.showMessage(context.getString(R.string.no_connect_internet))
+        else
+            launch {
+            val remoteProduct = mainApi.allProduct()
             val productsInBasket = remoteProduct.filter { productsIdInBasket.contains(it.id) }
-            viewState.setData(productsInBasket)
+            viewState.setBasket(productsInBasket)
         }
     }
 
@@ -42,7 +41,7 @@ class BasketPresenter(
     }
 
     fun getTotalPrice(basketProduct: List<RemoteProduct>): String {
-        var totalPrice:Double = 0.0
+        var totalPrice = 0.0
 
         basketProduct.forEach {
             totalPrice += getDiscountPrice(it)
@@ -53,7 +52,6 @@ class BasketPresenter(
     override fun onFailure(e: Throwable) {
         super.onFailure(e)
         if (e is UnknownHostException || e is ConnectException || e is SocketTimeoutException)
-            viewState.showError(e.message)
+            viewState.showMessage(e.message)
     }
-
 }

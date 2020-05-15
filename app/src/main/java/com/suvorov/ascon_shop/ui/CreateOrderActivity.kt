@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.widget.EditText
+import android.widget.Toast
 import com.suvorov.ascon_shop.R
 import com.suvorov.ascon_shop.data.ViewedProductDaoIml
 import com.suvorov.ascon_shop.domain.MainApi
@@ -33,7 +34,6 @@ class CreateOrderActivity: MvpAppCompatActivity(), CreateOrderView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_order)
 
-
         val totalPrice = intent.getStringExtra(TOTALPRICE_TAG)
 
         val editList = listOf<EditText>(
@@ -46,6 +46,7 @@ class CreateOrderActivity: MvpAppCompatActivity(), CreateOrderView {
 
         setListeners(editList)
 
+        //Total price
         createOrderTotalPriceWithSale.text = totalPrice
 
         back.setOnClickListener { finish() }
@@ -87,11 +88,15 @@ class CreateOrderActivity: MvpAppCompatActivity(), CreateOrderView {
             FieldType.POSITION -> createOrderPosition.showError(visible)
             FieldType.PHONE -> createOrderPhone.showError(visible)
             FieldType.EMAIL -> createOrderEmail.showError(visible)
+            else -> Toast.makeText(this,"Проверьте заполнение всех полей", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun moveMainActivity() {
-        val intent = Intent(this, CategoryActivity::class.java)
+        val intent = Intent(
+            this,
+            CategoryActivity::class.java
+        )
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent);
     }

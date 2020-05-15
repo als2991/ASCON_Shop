@@ -20,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 class CategoryActivity: MvpAppCompatActivity(), CategoryView {
+
     private val presenter by moxyPresenter {
         val retrofit = Retrofit.Builder()
             .baseUrl(getString(R.string.url_server))
@@ -58,7 +59,7 @@ class CategoryActivity: MvpAppCompatActivity(), CategoryView {
         })
     }
 
-    override fun showError(text: String?) {
+    override fun showMessage(text: String?) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 }

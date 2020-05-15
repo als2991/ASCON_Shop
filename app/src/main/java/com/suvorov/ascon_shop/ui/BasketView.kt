@@ -8,11 +8,11 @@ import moxy.viewstate.strategy.StateStrategyType
 interface BasketView: MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun setData(list: List<RemoteProduct>){}
+    fun setBasket(list: List<RemoteProduct>){}
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun removeItem(product: RemoteProduct, position: Int)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showError(text: String?)
+    fun showMessage(text: String?)
 }

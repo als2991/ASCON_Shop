@@ -41,15 +41,12 @@ data class RemoteCategory(
 
 interface MainApi {
 
-    @GET("categories/{author}")
-    suspend fun allCategory(@Path("author") author: String): List<RemoteCategory>
+    @GET("categories/suvorov")
+    suspend fun allCategory(): List<RemoteCategory>
 
-    @GET("products/{author}")
-    suspend fun allProduct(@Path("author") author: String): List<RemoteProduct>
+    @GET("products/suvorov")
+    suspend fun allProduct(): List<RemoteProduct>
 
-//    @POST("orders/new/{author}")
-//    suspend fun create(
-//        @Path("author")author: String,
-//        @Path("order") order: CreateOrderModel)
-
+    @POST("orders/new/suvorov")
+    suspend fun addOrder(@Body order: CreateOrderModel)
 }

@@ -1,6 +1,5 @@
 package com.suvorov.ascon_shop.ui
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -11,7 +10,6 @@ import com.suvorov.ascon_shop.domain.MainApi
 import com.suvorov.ascon_shop.domain.RemoteProduct
 import com.suvorov.ascon_shop.presenter.BasketPresenter
 import com.suvorov.ascon_shop.ui.CreateOrderActivity.Companion.TOTALPRICE_TAG
-import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.activity_basket.*
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -46,16 +44,17 @@ class BasketActivity: MvpAppCompatActivity(), BasketView {
 
         back.setOnClickListener { finish() }
 
-
         basketCreateOrder.setOnClickListener {
+            if (adapter.getBasketProduct().isEmpty()) Toast.makeText(this,"Ваша корзина пуста", Toast.LENGTH_SHORT).show()
+            else
             startActivity(Intent(this, CreateOrderActivity::class.java).apply {
                 putExtra(TOTALPRICE_TAG, presenter.getTotalPrice(adapter.getBasketProduct()))
             })
         }
     }
 
-    override fun setData(list: List<RemoteProduct>) {
-        adapter.setBasket(list)
+    override fun setBasket(list: List<RemoteProduct>) {
+        adapter.setData(list)
     }
 
     override fun removeItem(product: RemoteProduct, position: Int) {
@@ -63,7 +62,7 @@ class BasketActivity: MvpAppCompatActivity(), BasketView {
         adapter.notifyItemRemoved(position)
     }
 
-    override fun showError(text: String?) {
+    override fun showMessage(text: String?) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 }

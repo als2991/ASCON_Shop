@@ -11,11 +11,8 @@ interface ProductView: MvpView {
     fun setProduct(product: List<RemoteProduct>)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun onShowProduct(product: RemoteProduct)
+    fun onShowAboutProduct(product: RemoteProduct)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun onAddProductMessage(name: String)
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showError(text: String?)
+    fun showMessage(text: String?)
 }

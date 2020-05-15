@@ -39,7 +39,7 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
 
     private val adapter = ProductAdapter(
         this,
-     { product -> presenter.onProductClick(product)},
+        {product -> presenter.onProductClick(product)},
         {product -> presenter.getDiscountPrice(product)},
         {product -> presenter.addProductInBasket(product)}
     )
@@ -68,18 +68,14 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
         adapter.setData(product)
     }
 
-    override fun onShowProduct(product: RemoteProduct) {
+    override fun onShowAboutProduct(product: RemoteProduct) {
         startActivity(Intent(this, AboutProductActivity::class.java).apply {
             putExtra(PRODUCT_TAG, product)
         })
     }
 
-    override fun onAddProductMessage(name: String) {
-        Toast.makeText(this,"Товар $name добавлен в корзину", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun showError(text: String?) {
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+    override fun showMessage(text: String?) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
     companion object {
@@ -88,4 +84,4 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
 }
 
 val AppCompatActivity.sharedPreferences: SharedPreferences
-    get() = getSharedPreferences("data", Context.MODE_PRIVATE)
+    get() = getSharedPreferences("dataBasket", Context.MODE_PRIVATE)

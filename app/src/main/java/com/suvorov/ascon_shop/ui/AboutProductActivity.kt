@@ -1,5 +1,6 @@
 package com.suvorov.ascon_shop.ui
 
+import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.os.Bundle
 import com.bumptech.glide.Glide
@@ -14,26 +15,35 @@ class AboutProductActivity: MvpAppCompatActivity(), AboutProductView {
 
     val presenter = AboutProductPresenter()
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_product)
 
         val product = intent?.getParcelableExtra<RemoteProduct>(PRODUCT_TAG) ?: return
 
+        //Caption activity
         aboutProductHeader.text = product.name
+
         Glide
             .with(this)
             .load(product.imageUrl)
             .error(R.drawable.ic_no_category)
             .into(aboutProductImage)
+
         aboutProductPrice.text = "${product.price} р"
+
         if(product.discountPercent != 0){
             aboutProductPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             aboutProductDiscountPrice.text = "${presenter.getDiscountPrice(product)} р"
         }
+
         descriptionText.text = "${product.attributes[0].name}:"
+
         aboutProductDescription.text = product.attributes[0].value
+
         opportunitiesText.text = "${product.attributes[1].name}:"
+
         aboutProductOpportunities.text = product.attributes[1].value
 
         back.setOnClickListener { finish() }

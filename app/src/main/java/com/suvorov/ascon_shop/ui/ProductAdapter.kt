@@ -22,25 +22,7 @@ class ProductAdapter(
     private val onAddBasketClick: (product: RemoteProduct) -> Unit
 ): RecyclerView.Adapter<ProductAdapter.ViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductAdapter.ViewHolder =
-        ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
-        )
-
     private var products: List<RemoteProduct> = listOf()
-
-    override fun getItemCount(): Int = products.size
-
-    override fun onBindViewHolder(holder: ProductAdapter.ViewHolder, position: Int) {
-        holder.bind(products[position])
-    }
-
-    fun setData(
-        products: List<RemoteProduct>
-    ){
-        this.products = products
-        notifyDataSetChanged()
-    }
 
     inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView),
         LayoutContainer {
@@ -63,5 +45,23 @@ class ProductAdapter(
             itemView.productAdd.setOnClickListener { onAddBasketClick(product) }
 
         }
+    }
+
+    fun setData(
+        products: List<RemoteProduct>
+    ){
+        this.products = products
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductAdapter.ViewHolder =
+        ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
+        )
+
+    override fun getItemCount(): Int = products.size
+
+    override fun onBindViewHolder(holder: ProductAdapter.ViewHolder, position: Int) {
+        holder.bind(products[position])
     }
 }

@@ -10,8 +10,6 @@ import moxy.InjectViewState
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
-import java.time.Year
-import java.util.*
 
 @InjectViewState
 class CategoryPresenter (
@@ -22,13 +20,12 @@ class CategoryPresenter (
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        if(!hasConnection(context = context)) viewState.showError(context.getString(R.string.no_connect_internet))
-
+        if(!hasConnection(context = context)) viewState.showMessage(context.getString(R.string.no_connect_internet))
+        else
         launch {
-            val remoteCategory = mainApi.allCategory("suvorov")
+            val remoteCategory = mainApi.allCategory()
             viewState.setCategory(remoteCategory)
         }
-
     }
 
     fun onCategoryClick(category: RemoteCategory){
@@ -38,9 +35,7 @@ class CategoryPresenter (
     override fun onFailure(e: Throwable) {
         super.onFailure(e)
         if (e is UnknownHostException || e is ConnectException || e is SocketTimeoutException)
-            viewState.showError(e.message)
-
+            viewState.showMessage(e.message)
     }
-
 
 }

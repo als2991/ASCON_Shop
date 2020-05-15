@@ -1,10 +1,7 @@
 package com.suvorov.ascon_shop.presenter
 
-import android.app.Application
 import android.content.Context
-import android.util.Log
 import com.suvorov.ascon_shop.R
-import com.suvorov.ascon_shop.data.Basket
 import com.suvorov.ascon_shop.domain.MainApi
 import com.suvorov.ascon_shop.domain.RemoteCategory
 import com.suvorov.ascon_shop.domain.RemoteProduct
@@ -28,10 +25,10 @@ class ProductPresenter(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        if(!hasConnection(context = context)) viewState.showError(context.getString(R.string.no_connect_internet))
-
-        launch {
-            val remoteProduct = mainApi.allProduct("suvorov")
+        if(!hasConnection(context = context)) viewState.showMessage(context.getString(R.string.no_connect_internet))
+        else
+            launch {
+            val remoteProduct = mainApi.allProduct()
             val filterRemoteProduct = remoteProduct.filter { it.tag == tagCategory }
             viewState.setProduct(filterRemoteProduct)
         }
@@ -41,20 +38,19 @@ class ProductPresenter(
         this.tagCategory = category.tag
     }
 
-
     fun onProductClick(product: RemoteProduct) {
-        viewState.onShowProduct(product)
+        viewState.onShowAboutProduct(product)
     }
 
     fun addProductInBasket(product: RemoteProduct){
         viewedProductDao.addProductInBasket(product.id)
-        viewState.onAddProductMessage(product.name)
+        viewState.showMessage("Товар ${product.name} добавлен в корзину")
     }
 
     override fun onFailure(e: Throwable) {
         super.onFailure(e)
         if (e is UnknownHostException || e is ConnectException || e is SocketTimeoutException)
-            viewState.showError(e.message)
+            viewState.showMessage(e.message)
     }
 }
 
