@@ -103,12 +103,9 @@ class CreateOrderActivity: MvpAppCompatActivity(),
     }
 
     override fun moveMainActivity() {
-        val intent = Intent(
-            this,
-            CategoryActivity::class.java
-        )
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent);
+        startActivity(Intent(this,CategoryActivity::class.java)).apply {
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
     }
 
     override fun showMessage(text: String?) {
