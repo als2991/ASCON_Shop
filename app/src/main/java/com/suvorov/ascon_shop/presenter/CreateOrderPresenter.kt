@@ -1,6 +1,8 @@
 package com.suvorov.ascon_shop.presenter
 
-import com.suvorov.ascon_shop.data.ViewedProductDaoIml
+import android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+import android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT
+import android.widget.EditText
 import com.suvorov.ascon_shop.domain.MainApi
 import com.suvorov.ascon_shop.domain.ViewedProductDao
 import com.suvorov.ascon_shop.domain.model.CreateOrderModel
@@ -14,6 +16,10 @@ class CreateOrderPresenter(
     private val mainApi: MainApi
 ): BasePresenter<CreateOrderView>() {
 
+    private var totalPrice = ""
+
+    private var editList = listOf<EditText>()
+
     private val model = CreateOrderModel()
 
     private fun checkSymbols(text: String):Boolean = text.isEmpty()
@@ -25,24 +31,50 @@ class CreateOrderPresenter(
 
     fun checkEditText(
         text: String,
-        fieldType: FieldType
+        fieldType: FieldType?
     ) {
         when(fieldType){
             FieldType.ORGANIZATION -> model.organization
             FieldType.FIO -> model.fio
             FieldType.PHONE -> model.userPhone
             FieldType.EMAIL -> model.userEmail
+            else -> Unit
         }
-        if (fieldType == FieldType.EMAIL) viewState.showErrorForEditText(checkEmail(text),fieldType)
-        else viewState.showErrorForEditText(checkSymbols(text), fieldType)
+        if (fieldType == FieldType.EMAIL)
+            fieldType.let{viewState.showErrorForEditText(checkEmail(text),it)}
+        else
+            fieldType?.let { viewState.showErrorForEditText(checkSymbols(text), it) }
     }
 
     fun onClickOrderPlace() {
+
+        //Проверка на незаполненные поля
+        editList.forEach {
+            if (checkSymbols(it.text.toString())) {
+                viewState.showMessage("Заполните все поля")
+                return
+            }
+            if (it.hint == "Email")
+                if (checkEmail(it.text.toString())) {
+                    viewState.showMessage("Введите корректный Email")
+                    return
+                }
+        }
+
+        model.totalPrice = totalPrice
+
         viewedProductDao.clearProductInBasket()
-//        launch {
-//             mainApi.create("suvorov",model)
-//        }
+
+        launch {
+             mainApi.addOrder(model)
+        }
+
         viewState.moveMainActivity()
+    }
+
+    fun getInfoWithActivity(totalPrice: String, list:List<EditText>){
+        this.totalPrice = totalPrice
+        this.editList = list
     }
 }
 

@@ -8,5 +8,6 @@ data class CreateOrderModel(
     var fio: String = "",
     var userPhone: String = "",
     var userEmail: String = "",
+    var totalPrice: String = "",
     var productsId: List<String> = listOf()
 )

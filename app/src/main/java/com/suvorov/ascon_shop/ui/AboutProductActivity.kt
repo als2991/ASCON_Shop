@@ -5,13 +5,13 @@ import android.graphics.Paint
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.suvorov.ascon_shop.R
-import com.suvorov.ascon_shop.data.ViewedProductDaoIml
 import com.suvorov.ascon_shop.domain.RemoteProduct
 import com.suvorov.ascon_shop.presenter.AboutProductPresenter
 import kotlinx.android.synthetic.main.activity_about_product.*
 import moxy.MvpAppCompatActivity
 
-class AboutProductActivity: MvpAppCompatActivity(), AboutProductView {
+class AboutProductActivity: MvpAppCompatActivity(),
+    AboutProductView {
 
     val presenter = AboutProductPresenter()
 

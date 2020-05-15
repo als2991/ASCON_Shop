@@ -1,5 +1,6 @@
 package com.suvorov.ascon_shop.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -17,7 +18,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class CreateOrderActivity: MvpAppCompatActivity(), CreateOrderView {
+class CreateOrderActivity: MvpAppCompatActivity(),
+    CreateOrderView {
+
+    private var totalPrice = ""
+    private var editList = listOf<EditText>()
 
     private val presenter by moxyPresenter {
         val retrofit = Retrofit.Builder()
@@ -30,13 +35,15 @@ class CreateOrderActivity: MvpAppCompatActivity(), CreateOrderView {
             mainApi = service
     ) }
 
+
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_order)
 
-        val totalPrice = intent.getStringExtra(TOTALPRICE_TAG)
+        totalPrice = intent.getStringExtra(TOTALPRICE_TAG)
 
-        val editList = listOf<EditText>(
+         editList = listOf<EditText>(
             createOrderOrganization,
             createOrderFio,
             createOrderPosition,
@@ -44,10 +51,12 @@ class CreateOrderActivity: MvpAppCompatActivity(), CreateOrderView {
             createOrderEmail
         )
 
+        presenter.getInfoWithActivity(totalPrice, editList)
+
         setListeners(editList)
 
         //Total price
-        createOrderTotalPriceWithSale.text = totalPrice
+        createOrderTotalPriceWithSale.text = "${totalPrice} р"
 
         back.setOnClickListener { finish() }
 
@@ -69,6 +78,7 @@ class CreateOrderActivity: MvpAppCompatActivity(), CreateOrderView {
                 override fun afterTextChanged(s: Editable?) {
                     super.afterTextChanged(s)
                     presenter.checkEditText(it.text.toString(),editType)
+                    presenter.getInfoWithActivity(totalPrice, editList)
                 }
             })
         }
@@ -88,7 +98,7 @@ class CreateOrderActivity: MvpAppCompatActivity(), CreateOrderView {
             FieldType.POSITION -> createOrderPosition.showError(visible)
             FieldType.PHONE -> createOrderPhone.showError(visible)
             FieldType.EMAIL -> createOrderEmail.showError(visible)
-            else -> Toast.makeText(this,"Проверьте заполнение всех полей", Toast.LENGTH_SHORT).show()
+            else -> Unit
         }
     }
 
@@ -99,6 +109,10 @@ class CreateOrderActivity: MvpAppCompatActivity(), CreateOrderView {
         )
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent);
+    }
+
+    override fun showMessage(text: String?) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

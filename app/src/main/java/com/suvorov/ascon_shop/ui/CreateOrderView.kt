@@ -13,5 +13,8 @@ interface CreateOrderView: MvpView {
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun moveMainActivity ()
 
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showMessage(text: String?)
+
 
 }

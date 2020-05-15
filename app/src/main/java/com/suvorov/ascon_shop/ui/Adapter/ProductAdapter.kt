@@ -1,4 +1,4 @@
-package com.suvorov.ascon_shop.ui
+package com.suvorov.ascon_shop.ui.Adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.suvorov.ascon_shop.R
 import com.suvorov.ascon_shop.domain.RemoteProduct
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.activity_basket.view.*
 import kotlinx.android.synthetic.main.item_product.*
 import kotlinx.android.synthetic.main.item_product.view.*
 
@@ -54,14 +53,14 @@ class ProductAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductAdapter.ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
         )
 
     override fun getItemCount(): Int = products.size
 
-    override fun onBindViewHolder(holder: ProductAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(products[position])
     }
 }

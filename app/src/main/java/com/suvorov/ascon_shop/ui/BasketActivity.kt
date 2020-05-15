@@ -9,6 +9,7 @@ import com.suvorov.ascon_shop.data.ViewedProductDaoIml
 import com.suvorov.ascon_shop.domain.MainApi
 import com.suvorov.ascon_shop.domain.RemoteProduct
 import com.suvorov.ascon_shop.presenter.BasketPresenter
+import com.suvorov.ascon_shop.ui.Adapter.BasketAdapter
 import com.suvorov.ascon_shop.ui.CreateOrderActivity.Companion.TOTALPRICE_TAG
 import kotlinx.android.synthetic.main.activity_basket.*
 import moxy.MvpAppCompatActivity
@@ -16,7 +17,8 @@ import moxy.ktx.moxyPresenter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class BasketActivity: MvpAppCompatActivity(), BasketView {
+class BasketActivity: MvpAppCompatActivity(),
+    BasketView {
 
     private val presenter by moxyPresenter {
         val retrofit = Retrofit.Builder()
@@ -31,8 +33,8 @@ class BasketActivity: MvpAppCompatActivity(), BasketView {
         ) }
 
     private val adapter = BasketAdapter(
-        { product -> presenter.getDiscountPrice(product)},
-        { product, position -> presenter.deleteProductInBasket(product, position)}
+        { product -> presenter.getDiscountPrice(product) },
+        { product, position -> presenter.deleteProductInBasket(product, position) }
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

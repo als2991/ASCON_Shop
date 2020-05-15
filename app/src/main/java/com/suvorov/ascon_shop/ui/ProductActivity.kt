@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +14,7 @@ import com.suvorov.ascon_shop.domain.RemoteCategory
 import com.suvorov.ascon_shop.domain.RemoteProduct
 import com.suvorov.ascon_shop.presenter.ProductPresenter
 import com.suvorov.ascon_shop.ui.AboutProductActivity.Companion.PRODUCT_TAG
-import kotlinx.android.synthetic.main.activity_basket.*
+import com.suvorov.ascon_shop.ui.Adapter.ProductAdapter
 import kotlinx.android.synthetic.main.activity_product.*
 import kotlinx.android.synthetic.main.activity_product.back
 import moxy.MvpAppCompatActivity
@@ -23,7 +22,8 @@ import moxy.ktx.moxyPresenter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ProductActivity: MvpAppCompatActivity(), ProductView {
+class ProductActivity: MvpAppCompatActivity(),
+    ProductView {
 
     private val presenter by moxyPresenter {
         val retrofit = Retrofit.Builder()
@@ -39,9 +39,9 @@ class ProductActivity: MvpAppCompatActivity(), ProductView {
 
     private val adapter = ProductAdapter(
         this,
-        {product -> presenter.onProductClick(product)},
-        {product -> presenter.getDiscountPrice(product)},
-        {product -> presenter.addProductInBasket(product)}
+        { product -> presenter.onProductClick(product) },
+        { product -> presenter.getDiscountPrice(product) },
+        { product -> presenter.addProductInBasket(product) }
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

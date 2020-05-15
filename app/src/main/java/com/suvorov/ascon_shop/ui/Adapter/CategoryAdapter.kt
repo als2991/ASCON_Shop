@@ -1,4 +1,4 @@
-package com.suvorov.ascon_shop.ui
+package com.suvorov.ascon_shop.ui.Adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import com.suvorov.ascon_shop.R
 import com.suvorov.ascon_shop.domain.RemoteCategory
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_category.*
-import java.net.URL
 
 class CategoryAdapter(
     private val context: Context,
@@ -38,7 +37,7 @@ class CategoryAdapter(
     }
 
     //создает объект ViewHolder для каждой строки списка в Layout
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryAdapter.ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
         )
@@ -47,7 +46,7 @@ class CategoryAdapter(
     override fun getItemCount(): Int = categories.size
 
     //принимает объект ViewHolder и устанавливает необходимые данные для строки в View компоненте(прокидываем данные, которые необходимо отобразить)
-    override fun onBindViewHolder(holder: CategoryAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(categories[position])
     }
 

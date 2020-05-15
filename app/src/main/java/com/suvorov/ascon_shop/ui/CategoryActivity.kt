@@ -1,6 +1,5 @@
 package com.suvorov.ascon_shop.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -9,17 +8,17 @@ import com.suvorov.ascon_shop.R
 import com.suvorov.ascon_shop.domain.MainApi
 import com.suvorov.ascon_shop.domain.RemoteCategory
 import com.suvorov.ascon_shop.presenter.CategoryPresenter
+import com.suvorov.ascon_shop.ui.Adapter.CategoryAdapter
 import com.suvorov.ascon_shop.ui.ProductActivity.Companion.CATEGORY_TAG
 import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_category.basket
-import kotlinx.android.synthetic.main.activity_product.*
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 
-class CategoryActivity: MvpAppCompatActivity(), CategoryView {
+class CategoryActivity: MvpAppCompatActivity(),
+    CategoryView {
 
     private val presenter by moxyPresenter {
         val retrofit = Retrofit.Builder()
@@ -33,9 +32,10 @@ class CategoryActivity: MvpAppCompatActivity(), CategoryView {
         )
     }
 
-    private val adapter = CategoryAdapter(this){
-            category -> presenter.onCategoryClick(category)
-    }
+    private val adapter =
+        CategoryAdapter(this) { category ->
+            presenter.onCategoryClick(category)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
